@@ -1,7 +1,16 @@
 ---
 import LinkBlend from "@components/global/LinkBlend.astro";
 import { getLangFromUrl, useTranslations, useTranslatedPath } from "@i18n/utils";
-import heroBackground from "@assets/images/landing-page/pans-drone.png";
+import type { ImageMetadata } from "astro";
+
+const heroImagesImport = import.meta.glob<{ default: ImageMetadata }>(
+        "@assets/images/landing-page/*.{png,jpg,jpeg,webp}",
+        { eager: true },
+);
+const heroImages = Object.entries(heroImagesImport)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([, imageModule]) => imageModule?.default?.src)
+        .filter(Boolean);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,9 +20,15 @@ const translatePath = useTranslatedPath(lang);
 <section
         id="hero"
         class="section home-dark-section hero min-h-screen"
-        style={`background-image: url(${heroBackground.src});`}
+        data-hero-images={JSON.stringify(heroImages)}
 >
-	<div class="mx-auto flex h-full flex-col py-4 lg:py-10">
+        <div class="hero__background">
+                <div class="hero__background-inner">
+                        <div class="hero__background-layer is-active"></div>
+                        <div class="hero__background-layer"></div>
+                </div>
+        </div>
+        <div class="mx-auto flex h-full flex-col py-4 lg:py-10">
 		<div class="relative flex flex-1 flex-col justify-around rounded-lg pb-10 pt-20 lg:rounded-2xl">
 			<div class="flex justify-center">
 				<h1 class="text-center font-display text-5xl font-extrabold uppercase sm:text-7xl md:text-8xl lg:text-9xl">
@@ -55,13 +70,43 @@ const translatePath = useTranslatedPath(lang);
                 position: relative;
                 border-radius: inherit;
                 overflow: hidden;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
+                background-color: black;
         }
-	.hero > div {
-		grid-column: 1 / span 12;
-	}
+        .hero__background {
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                z-index: 0;
+                display: flex;
+        }
+        .hero__background-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                transform-origin: top center;
+                will-change: transform, border-radius;
+        }
+        .hero__background-layer {
+                position: absolute;
+                inset: 0;
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                opacity: 0;
+        }
+        .hero__background-layer.is-active {
+                opacity: 1;
+        }
+        .hero__background-layer,
+        .hero__background-layer.is-active {
+                transition: opacity 0.8s ease-in-out;
+        }
+        .hero > .mx-auto {
+                grid-column: 1 / span 12;
+                position: relative;
+                z-index: 1;
+        }
 
 	/* Hero appearance */
 	.hero h1,
@@ -97,7 +142,90 @@ const translatePath = useTranslatedPath(lang);
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
         function init() {
+                const heroSection = document.getElementById("hero");
                 const heroHeading = document.querySelector(".hero h1");
+                let heroImages = [];
+
+                if (heroSection?.dataset.heroImages) {
+                        try {
+                                const parsed = JSON.parse(heroSection.dataset.heroImages);
+                                heroImages = Array.isArray(parsed)
+                                        ? parsed.filter((value) => typeof value === "string")
+                                        : [];
+                        } catch (error) {
+                                heroImages = [];
+                        }
+                }
+                const backgroundInner = heroSection?.querySelector(".hero__background-inner");
+                const backgroundLayers = heroSection
+                        ? Array.from(heroSection.querySelectorAll(".hero__background-layer"))
+                        : [];
+
+                if (heroSection && backgroundInner && backgroundLayers.length >= 2 && Array.isArray(heroImages) && heroImages.length > 0) {
+                        let currentIndex = 0;
+                        let activeLayer = backgroundLayers[0];
+                        let inactiveLayer = backgroundLayers[1];
+
+                        gsap.set(backgroundInner, {
+                                scaleX: 1,
+                                borderBottomLeftRadius: 0,
+                                borderBottomRightRadius: 0,
+                        });
+                        activeLayer.style.backgroundImage = `url(${heroImages[currentIndex]})`;
+                        activeLayer.classList.add("is-active");
+
+                        const setUpcomingImage = () => {
+                                if (heroImages.length > 1) {
+                                        const nextIndex = (currentIndex + 1) % heroImages.length;
+                                        inactiveLayer.style.backgroundImage = `url(${heroImages[nextIndex]})`;
+                                }
+                        };
+
+                        setUpcomingImage();
+
+                        const swapLayers = () => {
+                                activeLayer.classList.remove("is-active");
+                                inactiveLayer.classList.add("is-active");
+
+                                const temp = activeLayer;
+                                activeLayer = inactiveLayer;
+                                inactiveLayer = temp;
+                        };
+
+                        const updateBackground = () => {
+                                if (heroImages.length <= 1) {
+                                        return;
+                                }
+
+                                currentIndex = (currentIndex + 1) % heroImages.length;
+                                inactiveLayer.style.backgroundImage = `url(${heroImages[currentIndex]})`;
+
+                                requestAnimationFrame(() => {
+                                        swapLayers();
+                                        setUpcomingImage();
+                                });
+                        };
+
+                        if (heroImages.length > 1) {
+                                setInterval(updateBackground, 2000);
+                        }
+
+                        ScrollTrigger.create({
+                                trigger: heroSection,
+                                start: "top top",
+                                end: "bottom top",
+                                onUpdate: (self) => {
+                                        const progress = gsap.utils.clamp(0, 1, self.progress);
+                                        const scale = 1 - 0.12 * progress;
+                                        const radius = 64 * progress;
+                                        gsap.set(backgroundInner, {
+                                                scaleX: scale,
+                                                borderBottomLeftRadius: `${radius}px`,
+                                                borderBottomRightRadius: `${radius}px`,
+                                        });
+                                },
+                        });
+                }
 
                 if (heroHeading) {
                         const staticPart = heroHeading.querySelector(":scope > span:first-child");

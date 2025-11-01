@@ -6,171 +6,180 @@ export const languages = {
 export const defaultLang = "en";
 
 export const ui = {
-	en: {
-		or: "or",
-		contact: "Contact",
-		contacts: "Contacts",
-		contactus: "Contact us",
-		projects: "Projects",
-		services: "Services",
-		homepage: "Homepage",
-		tagline:
-			"Our aim is to make your website a key driver for sales and conversions, combining engaging design, easy navigation, and strong SEO. We focus on attracting visitors and leading them effortlessly to purchase, ensuring your products shine. Your success is our mission.",
-		"projects.yours": "Your project",
-		"projects.see": "See project",
-		"hero.title.main": "We create",
-		"hero.title.1": "websites",
-		"hero.title.2": "apps",
-		"hero.title.3": "designs",
-		"hero.title.4": "brands",
-		"hero.subtitle":
-			"Our digital agency specializes in crafting captivating websites that convert and sell. Contact us for a free consultation.",
-		"hero.scroll": "scroll down to explore more",
-		"websites.title": "Websites",
-		"apps.title": "Apps",
-		"uiux.title": "UI/UX Design",
-		"seo.title": "SEO",
-		"advertising.title": "Advertising",
-		"websites.content": "At Mintaka Studio, we specialize in crafting bespoke websites tailored to your brand's needs. Our approach combines aesthetic design with technical proficiency, ensuring your site is visually stunning, fast, and responsive across all devices.",
-		"apps.content": "We deliver top-tier app development services, focusing on creating intuitive, efficient, and engaging mobile applications. Whether for iOS, Android, or cross-platform, our apps are designed to enhance user experience and drive business growth.",
-		"uiux.content": "Our UI/UX design services are centered on creating user-centric interfaces that are both visually appealing and easy to navigate. We prioritize user experience, ensuring every design element aligns with the users' needs and enhances overall interaction with your digital products.",
-		"seo.content": "Mintaka Studio's SEO services are designed to increase your website's visibility and drive organic traffic. We use a blend of the latest SEO strategies and techniques to improve your search engine rankings, focusing on both on-page and off-page optimization.",
-		"advertising.content": "Our advertising services aim to maximize your ROI through targeted and effective ad campaigns. We specialize in creating compelling ad content and strategies that resonate with your audience, utilizing various platforms like Google Ads and social media to enhance your brand's reach and engagement.",
-		"privacy.wip": "Work in progress",
-		"privacy.wip.content": "This page will be updated soon",
-		"faqs.question1": "What's your favorite programming language?",
-		"faqs.answer1":
-			"We love TypeScript for its type safety and modern features, but we're also proficient in Python, JavaScript, and Go.",
-		"faqs.question2": "Do you have a coffee machine in the office?",
-		"faqs.answer2":
-			"Yes, and it's probably the most important piece of equipment we have! We run on caffeine and creativity.",
-		"faqs.question3": "What's your approach to rubber duck debugging?",
-		"faqs.answer3":
-			"We have a collection of rubber ducks, each specialized in different programming languages. They're surprisingly effective at finding bugs!",
-		"faqs.question4": "How do you handle merge conflicts?",
-		"faqs.answer4":
-			"With patience, coffee, and sometimes a bit of panic. But mostly with good Git practices and clear communication between team members.",
-		"faqs.question5": "What's your stance on tabs vs spaces?",
-		"faqs.answer5":
-			"This is a trick question! We use EditorConfig to maintain consistency across the team. But secretly, we're team spaces.",
-		"faqs.question6": "How many monitors do your developers use?",
-		"faqs.answer6":
-			"The correct answer is n+1, where n is the current number of monitors. There's always room for one more screen!",
-		"faqs.question7": "What's your debugging strategy?",
-		"faqs.answer7":
-			"First we try console.log, then we try proper debugging tools, finally we stare at the code until it confesses its bugs.",
-		"faqs.question8": "How do you celebrate successful deployments?",
-		"faqs.answer8":
-			"With a mix of relief, high-fives, and occasionally pizza. Then we immediately start worrying about the next deployment.",
-		"faqs.question9": "What's your preferred IDE theme?",
-		"faqs.answer9":
-			"Dark theme during the day, darker theme at night. Our developers are like vampires - we avoid bright lights.",
-		"faqs.question10": "How do you name your variables?",
-		"faqs.answer10":
-			"We follow strict naming conventions, but sometimes end up with classics like 'finalFinalVersionForReal' and 'thisWillDefinitelyWork'.",
-		"faq.otherquestions": "Other questions?",
-		"thanks.subtitle": "Mail sent successfully",
-		"thanks.title": "Thank you",
-		"thanks.content": "We will get back to you as soon as possible",
-		"contact.title": "Contact",
-		"contact.subtitle": "Carrier Pigeons Welcome, but Email is Faster!",
-		"contact.name": "Name",
-		"contact.email": "Email",
-		"contact.message": "Message",
-		"contact.company": "Company",
-		"contact.agree": "By sending this, you agree to our",
-		"contact.send": "Send",
-		"blog.title": "Blog",
-		"blog.subtitle": "Tech, Tips, and Typo's!",
-		"blog.gotoproject": "Go to project",
-		"footer.newsletter": "Subscribe to",
-		"footer.newsletter2": "our newsletter",
-		"footer.yourmail": "Your email",
-	},
-	it: {
-		or: "o",
-		contact: "Contattaci",
-		contacts: "Contatti",
-		contactus: "Contattaci",
-		projects: "Progetti",
-		services: "Servizi",
-		homepage: "Homepage",
-		tagline:
-			"In nostro obbiettivo è trasformare il tuo sito web in un catalizzatore potente di vendite e conversioni, fondendo un design accattivante con una navigazione intuitiva e un SEO efficace. Puntiamo a catturare l'attenzione dei visitatori e guidarli fluidamente verso l'acquisto, assicurandoci che i tuoi prodotti spicchino. Il tuo successo è il fulcro della nostra missione.",
-		"projects.yours": "Il tuo progetto",
-		"projects.see": "Visualizza progetto",
-		"hero.title.main": "Creiamo",
-		"hero.title.1": "siti",
-		"hero.title.2": "app",
-		"hero.title.3": "design",
-		"hero.title.4": "brand",
-		"hero.subtitle":
-			"Trasforma la tua visione in realtà con la nostra agenzia digitale. Specializzati in siti web innovativi che catturano l'attenzione e massimizzano le vendite, siamo pronti a elevare il tuo brand. Approfitta della nostra consulenza gratuita per iniziare.",
-		"hero.scroll": "scorri per scoprire di più",
-		"websites.title": "Siti",
-		"apps.title": "App",
-		"uiux.title": "Design UI/UX",
-		"seo.title": "SEO",
-		"advertising.title": "Pubblicità",
-		"websites.content": "Da Mintaka Studio, siamo specializzati nella realizzazione di siti web su misura per le esigenze del tuo marchio. Il nostro approccio combina design estetico con competenza tecnica, garantendo che il tuo sito sia visivamente accattivante, veloce e reattivo su tutti i dispositivi.",
-		"apps.content": "Offriamo servizi di sviluppo app di alto livello, concentrati sulla creazione di applicazioni mobili intuitive, efficienti e coinvolgenti. Sia per iOS, Android o piattaforme incrociate, le nostre app sono progettate per migliorare l'esperienza utente e favorire la crescita aziendale.",
-		"uiux.content": "I nostri servizi di design UI/UX sono incentrati sulla creazione di interfacce centrate sull'utente che sono sia visivamente attraenti che facili da navigare. Diamo priorità all'esperienza utente, assicurando che ogni elemento di design sia in linea con le esigenze degli utenti e migliori l'interazione complessiva con i tuoi prodotti digitali.",
-		"seo.content": "I servizi SEO di Mintaka Studio sono progettati per aumentare la visibilità del tuo sito web e generare traffico organico. Utilizziamo una combinazione delle più recenti strategie e tecniche SEO per migliorare il tuo posizionamento sui motori di ricerca, concentrando sia sull'ottimizzazione on-page che off-page.",
-		"advertising.content": `I nostri servizi pubblicitari mirano a massimizzare il tuo ROI attraverso campagne pubblicitarie mirate ed efficaci. Siamo specializzati nella creazione di contenuti pubblicitari avvincenti e strategie che risuonano con il tuo pubblico, utilizzando varie piattaforme come Google Ads e i social media per potenziare la portata e l'engagement del tuo marchio.`,
-		"privacy.wip": "Lavori in corso",
-		"privacy.wip.content": "Questa pagina verrà aggiornata a breve",
-		"faqs.question1":
-			"Qual è il vostro linguaggio di programmazione preferito?",
-		"faqs.answer1":
-			"Amiamo TypeScript per la sua sicurezza dei tipi e le sue caratteristiche moderne, ma siamo anche esperti in Python, JavaScript e Go.",
-		"faqs.question2": "Avete una macchina del caffè in ufficio?",
-		"faqs.answer2":
-			"Sì, ed è probabilmente l'attrezzatura più importante che abbiamo! Funzioniamo a base di caffeina e creatività.",
-		"faqs.question3":
-			"Qual è il tuo approccio alla risoluzione dei problemi con il cane di gomma?",
-		"faqs.answer3":
-			"Abbiamo una collezione di cani di gomma, ciascuno specializzato in linguaggi di programmazione diversi. Sono efficaci sorprendentemente nel trovare i bug!",
-		"faqs.question4": "Come gestisci i conflitti di fusione?",
-		"faqs.answer4":
-			"Con pazienza, caffè e a volte un po' di panico. Ma per lo più con buone pratiche Git e chiara comunicazione tra i membri del team.",
-		"faqs.question5": "Qual è la tua posizione su tabs vs spazi?",
-		"faqs.answer5":
-			"Questa è una domanda trappola! Usiamo EditorConfig per mantenere la consistenza nel team. Ma in segreto, siamo team spazi.",
-		"faqs.question6": "Quanti monitor usano i tuoi sviluppatori?",
-		"faqs.answer6":
-			"La risposta corretta è n+1, dove n è il numero corrente di monitor. Ci sarà sempre spazio per uno schermo in più!",
-		"faqs.question7": "Qual è la tua strategia di debug?",
-		"faqs.answer7":
-			"Prima proviamo console.log, poi proviamo strumenti di debug appropriati, infine ci fissiamo sul codice fino a quando non confessa i suoi bug.",
-		"faqs.question8": "Come festeggiamo i deployment riusciti?",
-		"faqs.answer8":
-			"Con una miscela di sollievo, pugni, e occasionalmente pizza. Poi subito iniziamo a preoccuparci del prossimo deployment.",
-		"faqs.question9": "Qual è il tema IDE preferito?",
-		"faqs.answer9":
-			"Tema scuro durante il giorno, tema più scuro di notte. I nostri sviluppatori sono come vampiri - evitiamo luci forti.",
-		"faqs.question10": "Come chiami le tue variabili?",
-		"faqs.answer10":
-			"Seguiamo convenzioni di denominazione rigorose, ma a volte ci ritroviamo con classici come 'finalFinalVersionForReal' e 'thisWillDefinitelyWork'.",
-		"faq.otherquestions": "Altre domande?",
-		"thanks.subtitle": "Mail inviata con successo",
-		"thanks.title": "Grazie",
-		"thanks.content": "Ti risponderemo il prima possibile",
-		"contact.title": "Contatti",
-		"contact.subtitle":
-			"I piccioni viaggiatori sono i benvenuti, ma la posta elettronica è più veloce!",
-		"contact.name": "Nome",
-		"contact.email": "Email",
-		"contact.message": "Messaggio",
-		"contact.company": "Azienda",
-		"contact.agree": "Cliccando invia accetti la nostra",
-		"contact.send": "Invia",
-		"blog.title": "Blog",
-		"blog.subtitle": "Tecnologia, consigli e refusi!",
-		"blog.gotoproject": "Vai al progetto",
-		"footer.newsletter": "Iscriviti alla",
-		"footer.newsletter2": "newsletter",
-		"footer.yourmail": "La tua email",
-	},
+        en: {
+                or: "or",
+                contact: "Enquire",
+                contacts: "Enquiries",
+                contactus: "Plan your journey",
+                projects: "Itineraries",
+                services: "Our promise",
+                homepage: "Home",
+                tagline:
+                        "We devote ourselves to two handcrafted self-drive journeys – Zambia's wild heart and Malawi's lakeshore calm. Every lodge, track, and hidden viewpoint is personally scouted so you can travel independently with confidence.",
+                "projects.yours": "Your safari",
+                "projects.see": "Explore itinerary",
+                "hero.title.main": "We handcraft",
+                "hero.title.1": "Zambia",
+                "hero.title.2": "Malawi",
+                "hero.title.3": "self-drive",
+                "hero.title.4": "itineraries",
+                "hero.subtitle":
+                        "Mosi & Lake Safaris is a personal boutique outfitter curating just two self-drive routes. We chart the roads, vet the camps, and equip you with detailed guidance so you can roam Zambia and Malawi at your own pace.",
+                "hero.scroll": "drift down to meet the routes",
+                "services.zambia.title": "Zambia Wild Heart Route",
+                "services.zambia.content":
+                        "<div><p>Twelve days of leopard country, thundering waterfalls, and sunset boat drifts through the Lower Zambezi. We weave remote bush camps with insider-only stops and prepare the permits, driving notes, and backup contacts.</p></div>",
+                "services.malawi.title": "Malawi Lake & Highlands Route",
+                "services.malawi.content":
+                        "<div><p>Ten languid nights between tea estates, the Nyika Plateau, and secret beaches on Lake Malawi. Expect soulful owner-run lodges, birding detours, and curated community encounters that welcome independent travellers.</p></div>",
+                "services.prep.title": "Personal expedition briefing",
+                "services.prep.content":
+                        "<div><p>Every journey begins with a one-on-one planning call, a printed road book, GPS-ready maps, and our on-call WhatsApp support. You're driving solo, yet never without our watchful guidance.</p></div>",
+                "privacy.wip": "Privacy promise",
+                "privacy.wip.content":
+                        "We're updating this policy to reflect how we steward your enquiry details and travel preferences with the same care we give every itinerary.",
+                "faqs.question1": "How independent is the Zambia itinerary?",
+                "faqs.answer1":
+                        "You drive yourself between each stop, supported by our annotated maps, daily mileage notes, and round-the-clock WhatsApp contact in case you need a hand.",
+                "faqs.question2": "When is the best time to travel?",
+                "faqs.answer2":
+                        "Zambia sings from June to October with dry-season game viewing, while Malawi shines from May to September for clear lake days. We'll help you pick precise dates based on your interests.",
+                "faqs.question3": "Can you customise the routes?",
+                "faqs.answer3":
+                        "Absolutely. The core Zambia and Malawi frameworks stay intact, but we can adjust pacing, lodge styles, and activities to suit your comfort level and curiosities.",
+                "faqs.question4": "Do you arrange vehicles?",
+                "faqs.answer4":
+                        "Yes. We secure reliable 4x4 rentals, arrange cross-border paperwork if needed, and ensure recovery equipment is onboard before you collect the keys.",
+                "faqs.question5": "Is it suitable for first-time self-drivers?",
+                "faqs.answer5":
+                        "Both itineraries are crafted for confident travellers. We include optional guided add-ons for the trickier stretches and a detailed briefing before you depart.",
+                "faqs.question6": "How many travellers can join?",
+                "faqs.answer6":
+                        "Our journeys work beautifully for couples, families of four, or two friends sharing a vehicle. If you have a larger group we can suggest a second car and coordinated route notes.",
+                "faqs.question7": "What type of accommodation is included?",
+                "faqs.answer7":
+                        "Expect intimate owner-run camps and lodges we know personally. Most include dinner and breakfast, with select nights offering guided activities or picnics we arrange.",
+                "faqs.question8": "Do you help with border crossings?",
+                "faqs.answer8":
+                        "Certainly. We handle visa guidance, carbon tax payments, COMESA insurance, and provide a step-by-step checklist so the process is smooth.",
+                "faqs.question9": "What support is available while travelling?",
+                "faqs.answer9":
+                        "You'll receive our emergency numbers, local partner contacts, and a satellite-enabled messaging option for remote stretches. We track your progress discreetly each day.",
+                "faqs.question10": "How far in advance should we book?",
+                "faqs.answer10":
+                        "Six to nine months allows us to secure our favourite lodges and guides, though we can sometimes weave magic with less notice in shoulder seasons.",
+                "faq.otherquestions": "Have another question?",
+                "thanks.subtitle": "Enquiry received",
+                "thanks.title": "Thank you",
+                "thanks.content": "We'll reach out shortly to start shaping your safari.",
+                "contact.title": "Enquire",
+                "contact.subtitle": "Tell us when you'd like to travel and we'll begin tailoring your self-drive safari.",
+                "contact.name": "Name",
+                "contact.email": "Email",
+                "contact.message": "Tell us about your plans",
+                "contact.company": "Travel party (optional)",
+                "contact.agree": "By sending this enquiry you agree to our",
+                "contact.send": "Send enquiry",
+                "blog.title": "Field Notes",
+                "blog.subtitle": "Stories, practical tips, and updates from our Zambia and Malawi routes.",
+                "blog.gotoproject": "Return to itinerary",
+                "tags.title": "Tags",
+                "tags.subtitle": "Field Notes topics",
+                "tag.subtitle": "Field Notes tag",
+                "authors.title": "Authors",
+                "authors.subtitle": "Stories from the Mosi & Lake trail",
+                "author.subtitle": "Field Notes contributor",
+                "footer.newsletter": "Receive our",
+                "footer.newsletter2": "seasonal safari dispatch",
+                "footer.yourmail": "Email address",
+        },
+        it: {
+                or: "oppure",
+                contact: "Richiedi",
+                contacts: "Richieste",
+                contactus: "Organizza il viaggio",
+                projects: "Itinerari",
+                services: "La nostra promessa",
+                homepage: "Home",
+                tagline:
+                        "Ci dedichiamo a due soli itinerari self-drive artigianali: l'anima selvaggia dello Zambia e la calma del lago Malawi. Ogni tappa è provata in prima persona perché tu possa partire in autonomia con serenità.",
+                "projects.yours": "Il tuo safari",
+                "projects.see": "Esplora l'itinerario",
+                "hero.title.main": "Progettiamo su misura",
+                "hero.title.1": "Zambia",
+                "hero.title.2": "Malawi",
+                "hero.title.3": "self-drive",
+                "hero.title.4": "itinerari",
+                "hero.subtitle":
+                        "Mosi & Lake Safaris è una boutique personale che cura soltanto due percorsi self-drive. Tracciamo le strade, testiamo i campi e ti forniamo indicazioni dettagliate per esplorare Zambia e Malawi al tuo ritmo.",
+                "hero.scroll": "scorri per conoscere i percorsi",
+                "services.zambia.title": "Zambia Wild Heart",
+                "services.zambia.content":
+                        "<div><p>Dodici giorni tra felini, cascate e il fiume Zambesi. Alterniamo bush camp remoti a tappe segrete e prepariamo permessi, note di guida e contatti di supporto.</p></div>",
+                "services.malawi.title": "Malawi Lago & Highlands",
+                "services.malawi.content":
+                        "<div><p>Dieci notti lente tra piantagioni di tè, l'altopiano di Nyika e spiagge riservate sul lago Malawi. Lodge autentici, deviazioni ornitologiche e incontri di comunità selezionati.</p></div>",
+                "services.prep.title": "Briefing personale di spedizione",
+                "services.prep.content":
+                        "<div><p>Prima della partenza ti dedichiamo una call privata, un road book stampato, mappe GPS e il nostro supporto WhatsApp sempre attivo. Viaggi in autonomia, ma non sei mai sola/o.</p></div>",
+                "privacy.wip": "Impegno sulla privacy",
+                "privacy.wip.content":
+                        "Stiamo aggiornando questa pagina per raccontare come custodiamo richieste e preferenze di viaggio con la stessa cura riservata agli itinerari.",
+                "faqs.question1": "Quanto è autonoma la proposta in Zambia?",
+                "faqs.answer1":
+                        "Guiderai in autonomia tra ogni tappa, con le nostre mappe annotate, le distanze giorno per giorno e un contatto WhatsApp sempre reperibile.",
+                "faqs.question2": "Qual è il periodo migliore?",
+                "faqs.answer2":
+                        "Lo Zambia dà il meglio da giugno a ottobre per l'osservazione faunistica; il Malawi splende da maggio a settembre con cieli limpidi. Ti aiutiamo a scegliere le date ideali per i tuoi interessi.",
+                "faqs.question3": "Possiamo personalizzare i percorsi?",
+                "faqs.answer3":
+                        "Sì. Manteniamo l'ossatura Zambia o Malawi, ma adattiamo ritmo, stile delle strutture e attività secondo il tuo livello di comfort e curiosità.",
+                "faqs.question4": "Vi occupate del noleggio del 4x4?",
+                "faqs.answer4":
+                        "Certamente. Prenotiamo veicoli affidabili, gestiamo la documentazione transfrontaliera e controlliamo che l'attrezzatura di recupero sia a bordo prima del ritiro.",
+                "faqs.question5": "È adatto ai neofiti del self-drive?",
+                "faqs.answer5":
+                        "Gli itinerari sono pensati per viaggiatori curiosi e sicuri alla guida. Offriamo moduli guidati opzionali per i tratti più impegnativi e un briefing approfondito prima della partenza.",
+                "faqs.question6": "Quante persone possono partecipare?",
+                "faqs.answer6":
+                        "Funziona bene per coppie, famiglie fino a quattro persone o due amici che condividono il veicolo. Per gruppi più grandi suggeriamo un secondo mezzo con note coordinate.",
+                "faqs.question7": "Che tipo di alloggi includete?",
+                "faqs.answer7":
+                        "Selezioniamo campi e lodge gestiti da proprietari locali che conosciamo personalmente. La maggior parte include cena e colazione, con alcune notti arricchite da attività guidate o picnic organizzati.",
+                "faqs.question8": "Supportate il passaggio delle frontiere?",
+                "faqs.answer8":
+                        "Sì. Forniamo indicazioni su visti, tasse locali, assicurazione COMESA e una checklist dettagliata per rendere rapido ogni controllo.",
+                "faqs.question9": "Quale assistenza offrite durante il viaggio?",
+                "faqs.answer9":
+                        "Mettiamo a disposizione numeri di emergenza, contatti dei partner locali e, per i tratti remoti, un'opzione di messaggistica satellitare. Seguiamo il tuo percorso con discrezione ogni giorno.",
+                "faqs.question10": "Con quanto anticipo bisogna prenotare?",
+                "faqs.answer10":
+                        "Sei-nove mesi sono ideali per assicurarci i lodge preferiti, ma in bassa stagione possiamo trovare soluzioni anche con meno preavviso.",
+                "faq.otherquestions": "Hai un'altra domanda?",
+                "thanks.subtitle": "Richiesta ricevuta",
+                "thanks.title": "Grazie",
+                "thanks.content": "Ti ricontatteremo a breve per disegnare il tuo safari.",
+                "contact.title": "Richiedi",
+                "contact.subtitle": "Raccontaci quando vorresti partire e inizieremo a modellare il tuo self-drive.",
+                "contact.name": "Nome",
+                "contact.email": "Email",
+                "contact.message": "Raccontaci i tuoi piani",
+                "contact.company": "Compagni di viaggio (facoltativo)",
+                "contact.agree": "Inviando accetti la nostra",
+                "contact.send": "Invia la richiesta",
+                "blog.title": "Field Notes",
+                "blog.subtitle": "Storie, consigli pratici e aggiornamenti dai percorsi in Zambia e Malawi.",
+                "blog.gotoproject": "Torna all'itinerario",
+                "tags.title": "Tag",
+                "tags.subtitle": "Temi Field Notes",
+                "tag.subtitle": "Tag Field Notes",
+                "authors.title": "Autori",
+                "authors.subtitle": "Storie lungo i percorsi Mosi & Lake",
+                "author.subtitle": "Contributor di Field Notes",
+                "footer.newsletter": "Ricevi il nostro",
+                "footer.newsletter2": "bollettino stagionale",
+                "footer.yourmail": "Indirizzo email",
+        },
 } as const;
 
 export const showDefaultLang = false;

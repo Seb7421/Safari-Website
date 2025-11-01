@@ -20,18 +20,18 @@ const lang = getLangFromUrl(Astro.url);
 const shareImage = new URL("/images/meta/mintaka_share.gif", Astro.site).toString();
 
 const defaultSeo: AstroSeoProps = {
-	title: "Web Agency Leading in Performant Web Design Solutions - Mintaka Studio",
-	description:
-		"Mintaka Studio excels in creating fast, user-friendly websites with a focus on aesthetic design and SEO optimization, ensuring a standout online presence",
-	canonical: "https://mintaka.co",
-	openGraph: {
-		url: "https://mintaka.co",
-		title: "Web Agency Leading in Performant Web Design Solutions - Mintaka Studio",
-		description:
-			"Mintaka Studio excels in creating fast, user-friendly websites with a focus on aesthetic design and SEO optimization, ensuring a standout online presence",
-		images: [
-			{
-				url: shareImage,
+        title: "Mosi & Lake Safaris — Boutique Self-Drive Itineraries in Zambia & Malawi",
+        description:
+                "Mosi & Lake Safaris crafts two handcrafted self-drive journeys through Zambia and Malawi, pairing intimate camps with personal guidance for independent travellers.",
+        canonical: "https://mosiandlake.com",
+        openGraph: {
+                url: "https://mosiandlake.com",
+                title: "Mosi & Lake Safaris — Boutique Self-Drive Itineraries in Zambia & Malawi",
+                description:
+                        "Independent safaris with heart: discover our personally curated Zambia and Malawi self-drive routes, detailed road books, and on-call support.",
+                images: [
+                        {
+                                url: shareImage,
 				width: 1200,
 				height: 630,
 				alt: "Social open graph",
@@ -44,20 +44,20 @@ const defaultSeo: AstroSeoProps = {
 				alt: "Twitter open graph",
 				type: "image/gif",
 			},
-		],
-		site_name: "Mintaka",
-	},
-	twitter: {
-		handle: "@mintakastudio",
-		site: "@mintakastudio",
-		cardType: "summary_large_image",
-	},
-	additionalMetaTags: [
-		{
-			name: "publisher",
-			content: "Mintaka Studio",
-		},
-	],
+                ],
+                site_name: "Mosi & Lake Safaris",
+        },
+        twitter: {
+                handle: "@mosiandlake",
+                site: "@mosiandlake",
+                cardType: "summary_large_image",
+        },
+        additionalMetaTags: [
+                {
+                        name: "publisher",
+                        content: "Mosi & Lake Safaris",
+                },
+        ],
 };
 
 const seo = {

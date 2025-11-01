@@ -13,7 +13,7 @@ export default defineConfig({
 			},
 		},
 	},
-	site: "https://mintaka.co",
+        site: "https://mosiandlake.com",
 	i18n: {
 		defaultLocale: "en",
 		locales: ["en", "it"],

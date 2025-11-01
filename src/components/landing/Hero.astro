@@ -1,5 +1,6 @@
 ---
 import LinkBlend from "@components/global/LinkBlend.astro";
+import heroBackground from "@assets/images/locations/hero-background.png";
 import { getLangFromUrl, useTranslations, useTranslatedPath } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -8,8 +9,15 @@ const translatePath = useTranslatedPath(lang);
 ---
 
 <section id="hero" class="section home-dark-section hero min-h-screen">
-	<div class="mx-auto flex h-full flex-col py-4 lg:py-10">
-		<div class="relative flex flex-1 flex-col justify-around rounded-lg pb-10 pt-20 lg:rounded-2xl">
+		<div class="hero__background" aria-hidden="true">
+			<picture>
+					<source srcset={heroBackground.src} type="image/png" />
+					<img class="hero__background-image" src={heroBackground.src} alt="" loading="eager" decoding="async" />
+			</picture>
+			<div class="hero__overlay"></div>
+		</div>
+		<div class="mx-auto flex h-full flex-col py-4 lg:py-10">
+				<div class="relative flex flex-1 flex-col justify-around rounded-lg pb-10 pt-20 lg:rounded-2xl">
 			<div class="flex justify-center">
 				<h1 class="text-center font-display text-5xl font-extrabold uppercase sm:text-7xl md:text-8xl lg:text-9xl">
 					<span>{t("hero.title.main")}</span>
@@ -50,10 +58,38 @@ const translatePath = useTranslatedPath(lang);
 		position: relative;
 		border-radius: inherit;
 		overflow: hidden;
-	}
-	.hero > div {
-		grid-column: 1 / span 12;
-	}
+        }
+        .hero__background {
+                position: absolute;
+                inset: 0;
+                z-index: -2;
+                overflow: hidden;
+        }
+
+        .hero__background picture,
+        .hero__background-image {
+                width: 100%;
+                height: 100%;
+        }
+
+        .hero__background-image {
+                object-fit: cover;
+                filter: brightness(0.7);
+                transform-origin: center;
+        }
+
+        .hero__overlay {
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at 20% 20%, rgba(15, 23, 42, 0.45), transparent 55%), linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.5) 40%, rgba(15, 23, 42, 0.85) 100%);
+                mix-blend-mode: multiply;
+                pointer-events: none;
+                opacity: 0.85;
+                z-index: -1;
+        }
+        .hero > div {
+                grid-column: 1 / span 12;
+        }
 
 	/* Hero appearance */
 	.hero h1,
@@ -90,6 +126,8 @@ const translatePath = useTranslatedPath(lang);
 
         function init() {
                 const heroHeading = document.querySelector(".hero h1");
+				const heroBackgroundImage = document.querySelector<HTMLImageElement>(".hero__background-image");
+				const heroOverlay = document.querySelector<HTMLElement>(".hero__overlay");
 
                 if (heroHeading) {
                         const staticPart = heroHeading.querySelector(":scope > span:first-child");
@@ -141,6 +179,34 @@ const translatePath = useTranslatedPath(lang);
                                                 rotatorTimeline.add(wordTimeline, index === 0 ? 0 : index - 1);
                                         });
                                 });
+                        }
+                }
+
+				if (heroBackgroundImage) {
+                        gsap.set(heroBackgroundImage, { scale: 1.15, yPercent: 4 });
+                        const overlayInitialOpacity = heroOverlay ? parseFloat(getComputedStyle(heroOverlay).opacity || "1") : 1;
+
+                        const backgroundTimeline = gsap.timeline({
+                                scrollTrigger: {
+                                        trigger: "#services",
+                                        start: "top 80%",
+                                        end: "+=150%",
+                                        scrub: true,
+                                        markers: false,
+                                },
+                        });
+
+                        backgroundTimeline.to(heroBackgroundImage, { scale: 1, yPercent: -8, filter: "brightness(0.85)", ease: "power1.out" });
+
+                        if (heroOverlay) {
+                                backgroundTimeline.to(
+                                        heroOverlay,
+                                        {
+                                                opacity: Math.min(0.75, overlayInitialOpacity + 0.1),
+                                                ease: "sine.inOut",
+                                        },
+                                        0,
+                                );
                         }
                 }
 

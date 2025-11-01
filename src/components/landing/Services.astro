@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import designSvg from "@assets/images/services/creative-designer-doing-multitasking.svg?raw";
-import mobileSvg from "@assets/images/services/mobile-app-ui-ux-design.svg?raw";
-import websiteSvg from "@assets/images/services/website-ui-ux-development.svg?raw";
+import malawiImage from "@assets/images/locations/malawi-leopard.png";
+import zambiaImage from "@assets/images/locations/zambia-river.png";
 import { getLangFromUrl, useTranslations, useTranslatedPath } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -15,17 +15,28 @@ const points = [
         {
                 title: t("services.zambia.title"),
                 content: t("services.zambia.content"),
-                image: websiteSvg,
+                media: {
+                        type: "image" as const,
+                        src: zambiaImage,
+                        alt: "Aerial view of the Zambezi River in Zambia",
+                },
         },
         {
                 title: t("services.malawi.title"),
                 content: t("services.malawi.content"),
-                image: mobileSvg,
+				media: {
+                        type: "image" as const,
+                        src: malawiImage,
+                        alt: "Leopard watching from the trees in Malawi",
+                },
         },
         {
                 title: t("services.prep.title"),
                 content: t("services.prep.content"),
-                image: designSvg,
+				media: {
+                        type: "svg" as const,
+                        html: designSvg,
+                },
         },
 ];
 ---
@@ -37,12 +48,21 @@ const points = [
 			{points.map(() => <div class="indicator w-full grow bg-[#333333]" />)}
 		</div>
 		{
-			points.map(({ title, content, image }) => (
-				<div class="point flex h-screen w-full flex-col items-center justify-center gap-x-20 gap-y-12 p-16 pr-0 md:flex-row lg:gap-x-40">
-					<div class="hidden w-full max-w-80 lg:block">
-						<Fragment set:html={image} class="" />
-					</div>
-					<article class="flex flex-col gap-14">
+			points.map(({ title, content, media }) => (
+					<div class="point flex h-screen w-full flex-col items-center justify-center gap-x-20 gap-y-12 p-16 pr-0 md:flex-row lg:gap-x-40">
+							<div class="media mb-10 w-full max-w-3xl overflow-hidden rounded-3xl bg-zinc-900/40 shadow-2xl shadow-black/40 ring-1 ring-white/5 backdrop-blur md:mb-0 md:max-w-2xl lg:max-w-80" data-animate-media>
+									{media.type === "image" ? (
+											<Image
+													class="h-full w-full object-cover object-center"
+													src={media.src}
+													alt={media.alt}
+													loading="lazy"
+											/>
+									) : (
+											<Fragment set:html={media.html} class="" />
+									)}
+							</div>
+							<article class="flex flex-col gap-14">
 						<h3 class="faq font-display text-4xl uppercase md:text-5xl lg:text-6xl">{title}</h3>
 						<p class="max-w-2xl text-lg" set:html={content} />
 					</article>
@@ -105,15 +125,20 @@ const points = [
 
 			// https://codepen.io/zank/pen/oNVjYMM?editors=0010
 			tl.to(indicators[i], { backgroundColor: "white", duration: 0.25 }, i);
-			tl.from((elem as HTMLElement).querySelector("svg"), { autoAlpha: 0 }, i);
-			tl.from((elem as HTMLElement).querySelector("article"), { autoAlpha: 0, translateY: 100 }, i);
+			const media = (elem as HTMLElement).querySelector<HTMLElement>("[data-animate-media]");
+                        if (media) {
+                                tl.from(media, { autoAlpha: 0, scale: 0.95 }, i);
+                        }
+                        tl.from((elem as HTMLElement).querySelector("article"), { autoAlpha: 0, translateY: 100 }, i);
 
-			if (i != points.length - 1) {
-				tl.to(indicators[i], { backgroundColor: "#333333", duration: 0.25 }, i + 0.75);
-				tl.to((elem as HTMLElement).querySelector("article"), { autoAlpha: 0, translateY: -100 }, i + 0.75);
-				tl.to((elem as HTMLElement).querySelector("svg"), { autoAlpha: 0 }, i + 0.75);
-			}
-		});
+						if (i != points.length - 1) {
+                                tl.to(indicators[i], { backgroundColor: "#333333", duration: 0.25 }, i + 0.75);
+                                tl.to((elem as HTMLElement).querySelector("article"), { autoAlpha: 0, translateY: -100 }, i + 0.75);
+                                if (media) {
+                                        tl.to(media, { autoAlpha: 0, scale: 0.95 }, i + 0.75);
+                                }
+                        }
+                });
 	}
 
 	document.removeEventListener("DOMContentLoaded", init); // astro:page-load

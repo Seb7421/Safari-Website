@@ -5,6 +5,7 @@ import BaseHead from "@components/BaseHead.astro";
 import BackgroundTexture from "@components/global/BackgroundTexture.astro";
 import Footer from "@components/global/Footer.astro";
 import Navigation from "@components/global/Navigation.astro";
+import pansDrone from "@assets/images/landing-page/pans-drone.png";
 import { getLangFromUrl } from "../i18n/utils";
 
 const { pathname } = Astro.url;
@@ -69,6 +70,8 @@ function cursorFollowerActive() {
 	const paths = ["", "/", "/it/", "/it"];
 	return paths.includes(pathname);
 }
+
+const isLandingPage = cursorFollowerActive();
 ---
 
 <html lang={lang}>
@@ -77,10 +80,27 @@ function cursorFollowerActive() {
 		<AstroSeo {...seo} />
 	</head>
 	<body class="bg-slate-50">
-		<BackgroundTexture />
+		{isLandingPage ? (
+			<div class="landing-background" style={`--landing-background-image: url(${pansDrone.src});`}></div>
+		) : (
+			<BackgroundTexture />
+		)}
 		<Navigation />
-		{cursorFollowerActive() && <BlobCursorFollower />}
+		{isLandingPage && <BlobCursorFollower />}
 		<slot />
 		<Footer />
 	</body>
 </html>
+
+<style is:global>
+	.landing-background {
+		pointer-events: none;
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		background-image: var(--landing-background-image);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+</style>

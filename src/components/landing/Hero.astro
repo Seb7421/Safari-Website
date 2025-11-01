@@ -71,17 +71,10 @@ const translatePath = useTranslatedPath(lang);
 		position: relative;
 		margin: 0;
 	}
-	.hero :global(.split-parent) {
-		overflow: hidden;
-	}
-	.hero :global(.split-child) {
-		display: inline-block;
-	}
-
-	/* Text rotator */
-	.rotator > span {
-		position: absolute;
-	}
+        /* Text rotator */
+        .rotator > span {
+                position: absolute;
+        }
 
 	.rotator > span:not(:nth-child(1)) {
 		opacity: 0;
@@ -89,57 +82,70 @@ const translatePath = useTranslatedPath(lang);
 </style>
 
 <script>
-	import { gsap } from "gsap";
-	import { ScrollTrigger } from "gsap/ScrollTrigger";
-	import { SplitText } from "gsap/SplitText";
-	import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+        import { gsap } from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
+        import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-	gsap.registerPlugin(ScrollTrigger, SplitText, ScrollToPlugin);
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-	function init() {
-		const childSplit = new SplitText(".hero h1", {
-			type: "lines",
-			linesClass: "split-child",
-		});
-		const parentSplit = new SplitText(".hero h1", {
-			linesClass: "split-parent",
-		});
+        function init() {
+                const heroHeading = document.querySelector(".hero h1");
 
-		gsap.timeline()
-			.from(childSplit.lines, {
-				duration: 1.5,
-				yPercent: 100,
-				ease: "power4",
-				stagger: 0.1,
-			})
-			.set(".hero h1", { visibility: "visible" }, "<")
-			.then(() => {
-				const words = document.querySelectorAll(".hero .rotator > span");
+                if (heroHeading) {
+                        const staticPart = heroHeading.querySelector(":scope > span:first-child");
+                        const rotatorContainer = heroHeading.querySelector(":scope > span.rotator");
+                        const rotatorWords = rotatorContainer ? Array.from(rotatorContainer.querySelectorAll(":scope > span")) : [];
 
-				let rotatorTimeline = gsap.timeline({ repeat: -1 });
-				rotatorTimeline.timeScale(0.5);
+                        gsap.set(heroHeading, { visibility: "visible" });
 
-				for (let i = 0; i < words.length; i++) {
-					let delay = i - 1;
-					let wordTL = gsap.timeline();
-					if (i !== 0) {
-						gsap.set(words[i], { opacity: 1 });
-						wordTL.from(words[i], { duration: 1, yPercent: 100, opacity: 0, ease: "power4.out" });
-					} else {
-						// Handle the first one specially
-						delay += 1;
-						gsap.set(words[0], { opacity: 1, yPercent: 0 });
-					}
+                        const introTimeline = gsap.timeline();
 
-					if (i !== words.length - 1) {
-						wordTL.to(words[i], { duration: 1, yPercent: -100, opacity: 0, ease: "power4.out" });
-					}
-					rotatorTimeline.add(wordTL, delay);
-				}
-			});
+                        if (staticPart) {
+                                introTimeline.from(staticPart, {
+                                        duration: 1.2,
+                                        yPercent: 100,
+                                        opacity: 0,
+                                        ease: "power4.out",
+                                });
+                        }
 
-		var goProjectsButton = document.getElementById("go-projects-button");
-		goProjectsButton?.addEventListener("click", function () {
+                        if (rotatorWords.length > 0) {
+                                gsap.set(rotatorWords, { yPercent: 100, opacity: 0 });
+                                gsap.set(rotatorWords[0], { yPercent: 0, opacity: 1 });
+
+                                introTimeline.from(
+                                        rotatorWords[0],
+                                        {
+                                                duration: 1,
+                                                yPercent: 100,
+                                                opacity: 0,
+                                                ease: "power4.out",
+                                        },
+                                        "-=0.6",
+                                );
+
+                                introTimeline.then(() => {
+                                        const rotatorTimeline = gsap.timeline({ repeat: -1 }).timeScale(0.5);
+
+                                        rotatorWords.forEach((word, index) => {
+                                                const wordTimeline = gsap.timeline();
+
+                                                if (index !== 0) {
+                                                        wordTimeline.from(word, { duration: 1, yPercent: 100, opacity: 0, ease: "power4.out" });
+                                                }
+
+                                                if (index !== rotatorWords.length - 1) {
+                                                        wordTimeline.to(word, { duration: 1, yPercent: -100, opacity: 0, ease: "power4.out" });
+                                                }
+
+                                                rotatorTimeline.add(wordTimeline, index === 0 ? 0 : index - 1);
+                                        });
+                                });
+                        }
+                }
+
+                var goProjectsButton = document.getElementById("go-projects-button");
+                goProjectsButton?.addEventListener("click", function () {
 			gsap.to(window, { duration: 0.5, scrollTo: "#projects" });
 		});
 	}

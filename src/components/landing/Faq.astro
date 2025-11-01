@@ -197,11 +197,10 @@ const faqs = [
 </style>
 
 <script>
-	import { gsap } from "gsap";
-	import { ScrollTrigger } from "gsap/ScrollTrigger";
-	import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+        import { gsap } from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-	gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
+        gsap.registerPlugin(ScrollTrigger);
 
 	function init() {
 		gsap.to("#faq", {
@@ -216,40 +215,47 @@ const faqs = [
 			"--faq-radius": "5rem",
 		});
 
-		const linePath = document.querySelector("#faq-more-question-path");
+                const linePath = document.querySelector("#faq-more-question-path");
 
-		gsap.set(linePath, { drawSVG: 0 });
+                const moreQuestionsTimeline = gsap.timeline({
+                        scrollTrigger: {
+                                trigger: ".faq-more-questions",
+                                start: "center 90%",
+                                end: "center top",
+                                markers: false,
+                                toggleActions: "play none none reverse",
+                        },
+                });
 
-		let otherQTl = gsap
-			.timeline({
-				scrollTrigger: {
-					trigger: ".faq-more-questions",
-					start: "center 90%",
-					end: "center top",
-					markers: false,
-					toggleActions: "play none none reverse",
-				},
-			})
-			.to(".faq-more-questions .other-question-title", {
-				opacity: 1,
-				duration: 0.5,
-			})
-			.to(
-				linePath,
-				{
-					drawSVG: "100%",
-					duration: 2,
-				},
-				"<",
-			)
-			.to(
-				".faq-contact-us-button",
-				{
-					opacity: 1,
-				},
-				">-=1.5",
-			);
-	}
+                moreQuestionsTimeline.to(".faq-more-questions .other-question-title", {
+                        opacity: 1,
+                        duration: 0.5,
+                });
+
+                if (linePath instanceof SVGPathElement) {
+                        const totalLength = linePath.getTotalLength();
+                        linePath.style.strokeDasharray = `${totalLength}`;
+                        linePath.style.strokeDashoffset = `${totalLength}`;
+
+                        moreQuestionsTimeline.to(
+                                linePath,
+                                {
+                                        strokeDashoffset: 0,
+                                        duration: 2,
+                                        ease: "none",
+                                },
+                                "<",
+                        );
+                }
+
+                moreQuestionsTimeline.to(
+                        ".faq-contact-us-button",
+                        {
+                                opacity: 1,
+                        },
+                        ">-=1.5",
+                );
+        }
 
 	document.removeEventListener("DOMContentLoaded", init); // astro:page-load
 	document.addEventListener("DOMContentLoaded", init); // astro:page-load

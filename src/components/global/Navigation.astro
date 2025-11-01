@@ -287,24 +287,32 @@ const { pathname } = Astro.url;
 </style>
 
 <script>
-	import { gsap } from "gsap";
-	import { ScrollTrigger } from "gsap/ScrollTrigger";
-	import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+        import { gsap } from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-	gsap.registerPlugin(DrawSVGPlugin, ScrollTrigger);
+        gsap.registerPlugin(ScrollTrigger);
 
-	function init() {
-		gsap.timeline({
-			defaults: {
-				duration: 1,
-				ease: "power2.out",
-			},
-		})
-			.from(".logo-svg path", { drawSVG: 0 })
-			.to(".logo-svg path", { fill: "#000", duration: 2 }, "<+=0.5");
+        function init() {
+                const logoPath = document.querySelector(".logo-svg path");
 
-		let isHoveringMenu = false;
-		let menuCollapsed = false;
+                if (logoPath instanceof SVGPathElement) {
+                        const totalLength = logoPath.getTotalLength();
+                        logoPath.style.strokeDasharray = `${totalLength}`;
+                        logoPath.style.strokeDashoffset = `${totalLength}`;
+
+                        gsap
+                                .timeline({
+                                        defaults: {
+                                                duration: 1,
+                                                ease: "power2.out",
+                                        },
+                                })
+                                .to(logoPath, { strokeDashoffset: 0 })
+                                .to(logoPath, { fill: "#000", duration: 2 }, "<+=0.5");
+                }
+
+                let isHoveringMenu = false;
+                let menuCollapsed = false;
 
 		const pageLinksUl = document.querySelector("header .nav-container nav ul");
 

@@ -23,6 +23,7 @@ const translatePath = useTranslatedPath(lang);
         data-hero-images={JSON.stringify(heroImages)}
 >
         <div class="hero__background">
+                <div class="hero__background-texture"></div>
                 <div class="hero__background-inner">
                         <div class="hero__background-layer is-active"></div>
                         <div class="hero__background-layer"></div>
@@ -70,7 +71,7 @@ const translatePath = useTranslatedPath(lang);
                 position: relative;
                 border-radius: inherit;
                 overflow: hidden;
-                background-color: black;
+                background-color: transparent;
         }
         .hero__background {
                 position: absolute;
@@ -79,6 +80,16 @@ const translatePath = useTranslatedPath(lang);
                 z-index: 0;
                 display: flex;
         }
+        .hero__background-texture {
+                position: absolute;
+                inset: 0;
+                z-index: 0;
+                background-color: #f8f5ef;
+                background-image: url(/images/texture.png);
+                background-repeat: repeat;
+                background-size: 512px auto;
+                background-position: center;
+        }
         .hero__background-inner {
                 position: relative;
                 width: 100%;
@@ -86,6 +97,7 @@ const translatePath = useTranslatedPath(lang);
                 overflow: hidden;
                 transform-origin: top center;
                 will-change: transform, border-radius;
+                z-index: 1;
         }
         .hero__background-layer {
                 position: absolute;

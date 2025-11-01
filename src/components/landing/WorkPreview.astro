@@ -33,13 +33,14 @@ const allProjects = (await getCollection("projects"))
 		<ol class="grid grid-cols-1 gap-24 md:grid-cols-2 lg:gap-44">
 			{
 				allProjects.map((project, index) => (
-					<WokCard
-						image={project.data.image.source}
-						project={project.data.title}
-						link={`/work/${project.slug}`}
-						class={
-							index % 2 === 0
-								? `md:col-start-1 md:row-start-${Math.floor(index / 2) * 2 + 1} md:row-span-2`
+                                        <WokCard
+                                                image={project.data.image.source}
+                                                project={project.data.title}
+                                                link={`/work/${project.slug}`}
+                                                description={project.data.description}
+                                                class={
+                                                        index % 2 === 0
+                                                                ? `md:col-start-1 md:row-start-${Math.floor(index / 2) * 2 + 1} md:row-span-2`
 								: `md:col-start-2 md:row-start-${Math.floor(index / 2) * 2 + 2} md:row-span-2`
 						}
 					/>

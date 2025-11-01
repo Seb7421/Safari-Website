@@ -3,13 +3,13 @@
 	"type": "module",
 	"version": "0.0.1",
 	"private": true,
-	"description": "majestico.co website",
+        "description": "Mosi & Lake Safaris website",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/majesticooss/mintaka.git"
 	},
 	"bugs": "https://github.com/majesticooss/mintaka/issues",
-	"homepage": "https://mintaka.co",
+        "homepage": "https://mosiandlake.com",
 	"files": [
 		"*"
 	],

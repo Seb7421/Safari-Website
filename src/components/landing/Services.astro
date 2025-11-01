@@ -1,9 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import advertisingSvg from "@assets/images/services/advertising.svg?raw";
 import designSvg from "@assets/images/services/creative-designer-doing-multitasking.svg?raw";
 import mobileSvg from "@assets/images/services/mobile-app-ui-ux-design.svg?raw";
-import seoSvg from "@assets/images/services/seo-link-building.svg?raw";
 import websiteSvg from "@assets/images/services/website-ui-ux-development.svg?raw";
 import { getLangFromUrl, useTranslations, useTranslatedPath } from "@i18n/utils";
 
@@ -14,31 +12,21 @@ const translatePath = useTranslatedPath(lang);
 const { class: className } = Astro.props;
 
 const points = [
-	{
-		title: t("websites.title"),
-		content: t("websites.content"),
-		image: websiteSvg,
-	},
-	{
-		title: t("apps.title"),
-		content: t("apps.content"),
-		image: mobileSvg,
-	},
-	{
-		title: t("uiux.title"),
-		content: t("uiux.content"),
-		image: designSvg,
-	},
-	{
-		title: t("seo.title"),
-		content: t("seo.content"),
-		image: seoSvg,
-	},
-	{
-		title: t("advertising.title"),
-		content: t("advertising.content"),
-		image: advertisingSvg,
-	},
+        {
+                title: t("services.zambia.title"),
+                content: t("services.zambia.content"),
+                image: websiteSvg,
+        },
+        {
+                title: t("services.malawi.title"),
+                content: t("services.malawi.content"),
+                image: mobileSvg,
+        },
+        {
+                title: t("services.prep.title"),
+                content: t("services.prep.content"),
+                image: designSvg,
+        },
 ];
 ---
 

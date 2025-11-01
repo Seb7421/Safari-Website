@@ -35,85 +35,86 @@ const translatePath = useTranslatedPath(lang);
 </div>
 
 <style>
-	.text > p > :global(div) {
-		background: linear-gradient(to right, rgb(255, 255, 255) 50%, rgb(37, 37, 37) 50%);
-		background-size: 200% 100%;
-		background-position-x: 100%;
-		color: transparent;
-		background-clip: text;
-		-webkit-background-clip: text;
-		line-height: 1.2;
-	}
+        .text > p > :global(div) {
+                background: linear-gradient(to right, rgb(255, 255, 255) 50%, rgb(37, 37, 37) 50%);
+                background-size: 200% 100%;
+                background-position-x: 100%;
+                color: transparent;
+                background-clip: text;
+                -webkit-background-clip: text;
+                line-height: 1.2;
+        }
+        #tagline-arrow {
+                opacity: 0;
+                transform-box: fill-box;
+                transform-origin: center;
+        }
 </style>
 
 <script>
-	import { gsap } from "gsap";
-	import { ScrollTrigger } from "gsap/ScrollTrigger";
-	import { SplitText } from "gsap/SplitText";
-	import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
-	import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+        import { gsap } from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-	gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, MotionPathPlugin);
+        gsap.registerPlugin(ScrollTrigger);
 
-	function init() {
-		const linePath = document.querySelector("#tagline-arrow-path");
+        function init() {
+                const linePath = document.querySelector("#tagline-arrow-path");
+                const arrow = document.querySelector("#tagline-arrow");
 
-		gsap.set(linePath, { drawSVG: 0 });
+                if (linePath instanceof SVGPathElement) {
+                        const totalLength = linePath.getTotalLength();
+                        linePath.style.strokeDasharray = `${totalLength}`;
+                        linePath.style.strokeDashoffset = `${totalLength}`;
 
-		let otherQTl = gsap
-			.timeline({
-				scrollTrigger: {
-					trigger: ".tagline-arrows",
-					start: "center bottom",
-					end: "center center",
-					markers: false,
-					scrub: 1,
-				},
-			})
-			.to(
-				linePath,
-				{
-					drawSVG: "100%",
-				},
-				"<",
-			)
-			.to(
-				"#tagline-arrow",
-				{
-					opacity: 1,
-					duration: 0.1,
-				},
-				"<",
-			)
-			.to(
-				"#tagline-arrow",
-				{
-					motionPath: {
-						path: "#tagline-arrow-path",
-						align: "#tagline-arrow-path",
-						alignOrigin: [0.5, 0.5],
-						autoRotate: 30,
-					},
-				},
-				0,
-			);
+                        const arrowTimeline = gsap.timeline({
+                                scrollTrigger: {
+                                        trigger: ".tagline-arrows",
+                                        start: "center bottom",
+                                        end: "center center",
+                                        markers: false,
+                                        scrub: 1,
+                                },
+                        });
 
-		const split = new SplitText("#services-tagline", { type: "lines" });
+                        arrowTimeline.to(linePath, { strokeDashoffset: 0, ease: "none" }, 0);
 
-		split.lines.forEach((target) => {
-			gsap.to(target, {
-				backgroundPositionX: 0,
-				ease: "none",
-				scrollTrigger: {
-					trigger: target,
-					markers: false,
-					scrub: 1,
-					start: "top bottom-=20%",
-					end: "bottom bottom-=10%",
-				},
-			});
-		});
-	}
+                        if (arrow instanceof SVGPathElement) {
+                                const arrowBox = arrow.getBBox();
+                                const offsetX = arrowBox.x + arrowBox.width / 2;
+                                const offsetY = arrowBox.y + arrowBox.height / 2;
+
+                                arrowTimeline.eventCallback("onUpdate", () => {
+                                        const progress = arrowTimeline.progress();
+                                        const currentLength = totalLength * progress;
+                                        const clampedLength = Math.max(0, Math.min(totalLength, currentLength));
+                                        const point = linePath.getPointAtLength(clampedLength);
+                                        const lookAhead = Math.min(totalLength, clampedLength + 1);
+                                        const nextPoint = linePath.getPointAtLength(lookAhead);
+                                        const angle = Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x) * (180 / Math.PI);
+
+                                        arrow.style.opacity = progress > 0 ? "1" : "0";
+                                        arrow.style.transformBox = "fill-box";
+                                        arrow.style.transformOrigin = "center";
+                                        arrow.style.transform = `translate(${point.x - offsetX}px, ${point.y - offsetY}px) rotate(${angle}deg)`;
+                                });
+                        }
+                }
+
+                const tagline = document.querySelector("#services-tagline");
+                if (tagline) {
+                        gsap.to(tagline, {
+                                backgroundPositionX: 0,
+                                ease: "none",
+                                scrollTrigger: {
+                                        trigger: tagline,
+                                        markers: false,
+                                        scrub: 1,
+                                        start: "top bottom-=20%",
+                                        end: "bottom bottom-=10%",
+                                },
+                        });
+                }
+        }
 
 	document.removeEventListener("DOMContentLoaded", init); // astro:page-load
 	document.addEventListener("DOMContentLoaded", init); // astro:page-load

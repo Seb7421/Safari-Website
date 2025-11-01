@@ -30,35 +30,37 @@ const { class: className } = Astro.props;
 </section>
 
 <script>
-	import { gsap } from "gsap";
-	import { ScrollTrigger } from "gsap/ScrollTrigger";
-	import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+        import { gsap } from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-	gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
+        gsap.registerPlugin(ScrollTrigger);
 
-	function init() {
-		const linePath = document.querySelector(".all-in-one-line-path");
+        function init() {
+                const linePath = document.querySelector(".all-in-one-line-path");
 
-		gsap.set(linePath, { drawSVG: 0 });
+                if (linePath instanceof SVGPathElement) {
+                        const totalLength = linePath.getTotalLength();
+                        linePath.style.strokeDasharray = `${totalLength}`;
+                        linePath.style.strokeDashoffset = `${totalLength}`;
 
-		gsap.timeline({
-			scrollTrigger: {
-				trigger: ".line-animation-wrapper",
-				scrub: 1,
-				start: "top center",
-				end: "bottom center",
-				markers: false,
-			},
-			defaults: { ease: "none" },
-		}).to(
-			linePath,
-			{
-				drawSVG: "100%",
-				// ease: "power4.in",
-			},
-			0,
-		);
-	}
+                        gsap.timeline({
+                                scrollTrigger: {
+                                        trigger: ".line-animation-wrapper",
+                                        scrub: 1,
+                                        start: "top center",
+                                        end: "bottom center",
+                                        markers: false,
+                                },
+                                defaults: { ease: "none" },
+                        }).to(
+                                linePath,
+                                {
+                                        strokeDashoffset: 0,
+                                },
+                                0,
+                        );
+                }
+        }
 
 	document.removeEventListener("DOMContentLoaded", init); // astro:page-load
 	document.addEventListener("DOMContentLoaded", init); // astro:page-load

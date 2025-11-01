@@ -65,11 +65,10 @@ const points = [
 </section>
 
 <script>
-	import { gsap } from "gsap";
-	import { ScrollTrigger } from "gsap/ScrollTrigger";
-	import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+        import { gsap } from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-	gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
+        gsap.registerPlugin(ScrollTrigger);
 
 	function init() {
 		var points = gsap.utils.toArray(".point") as gsap.DOMTarget[];

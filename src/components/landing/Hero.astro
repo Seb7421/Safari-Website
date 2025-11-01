@@ -9,14 +9,14 @@ const translatePath = useTranslatedPath(lang);
 ---
 
 <section id="hero" class="section home-dark-section hero min-h-screen">
-		<div class="hero__background" aria-hidden="true">
-			<picture>
-					<source srcset={heroBackground.src} type="image/png" />
-					<img class="hero__background-image" src={heroBackground.src} alt="" loading="eager" decoding="async" />
-			</picture>
-			<div class="hero__overlay"></div>
-		</div>
-		<div class="mx-auto flex h-full flex-col py-4 lg:py-10">
+                <div class="hero__background" aria-hidden="true">
+                        <picture>
+                                <source srcset={heroBackground.src} type="image/png" />
+                                <img class="hero__background-image" src={heroBackground.src} alt="" loading="eager" decoding="async" />
+                        </picture>
+                        <div class="hero__overlay"></div>
+                </div>
+                <div class="hero__content mx-auto flex h-full flex-col py-4 lg:py-10">
 				<div class="relative flex flex-1 flex-col justify-around rounded-lg pb-10 pt-20 lg:rounded-2xl">
 			<div class="flex justify-center">
 				<h1 class="text-center font-display text-5xl font-extrabold uppercase sm:text-7xl md:text-8xl lg:text-9xl">
@@ -86,6 +86,10 @@ const translatePath = useTranslatedPath(lang);
                 pointer-events: none;
                 opacity: 0.85;
                 z-index: -1;
+        }
+        .hero__content {
+                position: relative;
+                z-index: 1;
         }
         .hero > div {
                 grid-column: 1 / span 12;
